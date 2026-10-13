@@ -628,6 +628,11 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/2a/39/e50c7c3a983047577ee07d2a9e53faf5a69493943ec3f6a384bdc792deb2/httpx-0.28.1-py3-none-any.whl", hash = "sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad", size = 73517, upload-time = "2024-12-06T15:37:21.509Z" },
 ]
 
+[package.optional-dependencies]
+socks = [
+    { name = "socksio" },
+]
+
 [[package]]
 name = "idna"
 version = "3.16"
@@ -2226,6 +2231,7 @@ name = "sedbuilder-demo"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "httpx", extra = ["socks"] },
     { name = "jupyter" },
     { name = "pandas" },
     { name = "seaborn" },
@@ -2234,10 +2240,11 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "httpx", extras = ["socks"], specifier = ">=0.28.1" },
     { name = "jupyter", specifier = ">=1.1.1" },
     { name = "pandas", specifier = ">=3.0.3" },
     { name = "seaborn", specifier = ">=0.13.2" },
-    { name = "ssdc-sedbuilder", specifier = ">=2.0.0" },
+    { name = "ssdc-sedbuilder", editable = "../sedbuilder" },
 ]
 
 [[package]]
@@ -2268,6 +2275,15 @@ wheels = [
 ]
 
 [[package]]
+name = "socksio"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f8/5c/48a7d9495be3d1c651198fd99dbb6ce190e2274d0f28b9051307bdec6b85/socksio-1.0.0.tar.gz", hash = "sha256:f88beb3da5b5c38b9890469de67d0cb0f9d494b78b106ca1845f96c10b91c4ac", size = 19055, upload-time = "2020-04-17T15:50:34.664Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/37/c3/6eeb6034408dac0fa653d126c9204ade96b819c936e136c5e8a6897eee9c/socksio-1.0.0-py3-none-any.whl", hash = "sha256:95dc1f15f9b34e8d7b16f06d74b8ccf48f609af32ab33c608d08761c5dcbb1f3", size = 12763, upload-time = "2020-04-17T15:50:31.878Z" },
+]
+
+[[package]]
 name = "soupsieve"
 version = "2.8.4"
 source = { registry = "https://pypi.org/simple" }
@@ -2278,17 +2294,31 @@ wheels = [
 
 [[package]]
 name = "ssdc-sedbuilder"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
+version = "3.0.0"
+source = { editable = "../sedbuilder" }
 dependencies = [
     { name = "astropy" },
     { name = "httpx" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/55/af/6d7c1461e96f985fefc34cdfa2d3a8306b47b6e30bbac51384ce56f5a9f5/ssdc_sedbuilder-2.0.0.tar.gz", hash = "sha256:717e2d326ead8b34752c48097949af6bc87e6cd79bb64a28c1ab5bf47ba3791b", size = 393598, upload-time = "2026-05-22T14:28:14.804Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/0b/c7/4c73698fd6594af9793532661c4f6ff2dcf6e0f53952823f5bbdd3e04266/ssdc_sedbuilder-2.0.0-py3-none-any.whl", hash = "sha256:93f6cfbfa302fa555b03ff301c9eafe0684205945041e083df6806c74cb6bfaa", size = 37625, upload-time = "2026-05-22T14:28:16.121Z" },
+
+[package.metadata]
+requires-dist = [
+    { name = "astropy", specifier = "~=7.0" },
+    { name = "black", marker = "extra == 'dev'" },
+    { name = "httpx" },
+    { name = "ipython", marker = "extra == 'dev'" },
+    { name = "isort", marker = "extra == 'dev'" },
+    { name = "mkdocs", marker = "extra == 'docs'" },
+    { name = "mkdocs-material", marker = "extra == 'docs'" },
+    { name = "mkdocstrings", extras = ["python"], marker = "extra == 'docs'" },
+    { name = "pandas", marker = "extra == 'dev'" },
+    { name = "pre-commit", marker = "extra == 'dev'" },
+    { name = "pydantic" },
+    { name = "pyinstrument", marker = "extra == 'dev'" },
+    { name = "pytest", marker = "extra == 'dev'" },
 ]
+provides-extras = ["dev", "docs"]
 
 [[package]]
 name = "stack-data"
